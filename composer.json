@@ -1,5 +1,5 @@
 {
-  "name": "kuetemeier/php-collection",
+  "name": "kuetemeier/collection",
   "description": "A common Collection PHP class to use as a baseline in your projects.",
   "type": "library",
   "license": "Apache-2.0",
