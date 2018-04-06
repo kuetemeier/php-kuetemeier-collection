@@ -39,6 +39,6 @@ class Collection
 
     public function helloWorld()
     {
-        echo "Hallo Welt";
+        echo "Hallo Welt - Hello World!";
     }
 }
