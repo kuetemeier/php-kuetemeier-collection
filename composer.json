@@ -1,27 +1,32 @@
 {
-    "name": "kuetemeier/php-collection",
-    "description": "A common Collection PHP class to use as a baseline in your projects.",
-    "type": "library",
-    "license": "Apache-2.0",
-    "authors": [
-        {
-            "name": "Joerg Kuetemeier",
-            "email": "joerg@kuetemeier.de",
-            "homepage": "https://kuetemeier.de"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/kuetemeier/kuetemeier-php-collection/issues",
-        "source": "https://github.com/kuetemeier/kuetemeier-php-collection"
-    },
-    "keywords": [
-        "kuetemeier",
-        "collection",
-        "php"
-    ],    
-    "minimum-stability": "dev",
-    "require": {},
-    "require-dev": {
-        "squizlabs/php_codesniffer": "3.*"
+  "name": "kuetemeier/php-collection",
+  "description": "A common Collection PHP class to use as a baseline in your projects.",
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Joerg Kuetemeier",
+      "email": "joerg@kuetemeier.de",
+      "homepage": "https://kuetemeier.de"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/kuetemeier/kuetemeier-php-collection/issues",
+    "source": "https://github.com/kuetemeier/kuetemeier-php-collection"
+  },
+  "keywords": [
+    "kuetemeier",
+    "collection",
+    "php"
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kuetemeier\\Collection\\": "src/Kuetemeier/Collection/"
+    }
+  }
 }
