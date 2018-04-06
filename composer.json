@@ -23,7 +23,8 @@
   "require": {},
   "require-dev": {
     "squizlabs/php_codesniffer": "3.*",
-    "phpunit/phpunit": "^7"
+    "phpunit/phpunit": "^7",
+    "phpdocumentor/phpdocumentor": "2.*"
   },
   "autoload": {
     "psr-4": {

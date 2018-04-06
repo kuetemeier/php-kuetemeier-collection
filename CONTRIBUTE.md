@@ -3,5 +3,8 @@
 ## Prepare for development
 
 ```
-    composer install
+    npm update
+    composer update
+
+    gulp watch
 ```
