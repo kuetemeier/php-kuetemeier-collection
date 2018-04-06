@@ -33,7 +33,7 @@ namespace Kuetemeier\Collection;
   */
 class Collection
 {
-    public function __constructor()
+    public function __construct()
     {
         echo "Hallo Welt";
     }
