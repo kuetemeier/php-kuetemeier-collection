@@ -21,7 +21,7 @@ gulp.task('clean', function() {
 });
 
 
-gulp.task('replace_readme_md', function() {
+gulp.task('replace_in_readme_md', function() {
   return gulp.src(["./README.md"], {base: './'})
     .pipe(replace(/(Description: )(.*)/, '$1' + pkg.description))
     .pipe(replace(/([v,V]ersion: )(.*)/, '$1' + pkg.version + '  '))
@@ -30,7 +30,15 @@ gulp.task('replace_readme_md', function() {
 });
 
 
-gulp.task('replace', ['replace_readme_md']);
+gulp.task('replace_in_composer', function() {
+  return gulp.src(["./composer.json"], {base: './'})
+    .pipe(replace(/(Description: )(.*)/, '$1' + pkg.description))
+    .pipe(replace(/("[v,V]ersion": ")(.*)",/, '$1' + pkg.version + '",'))
+    .pipe(gulp.dest('./'));
+});
+
+
+gulp.task('replace', ['replace_in_readme_md', 'replace_in_composer']);
 
 
 gulp.task('phpdoc', function() {
