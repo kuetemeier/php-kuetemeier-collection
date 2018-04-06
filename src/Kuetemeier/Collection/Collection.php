@@ -35,6 +35,10 @@ class Collection
 {
     public function __construct()
     {
+    }
+
+    public function helloWorld()
+    {
         echo "Hallo Welt";
     }
 }
