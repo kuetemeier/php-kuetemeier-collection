@@ -6,9 +6,22 @@
     "authors": [
         {
             "name": "Joerg Kuetemeier",
-            "email": "joerg@kuetemeier.de"
+            "email": "joerg@kuetemeier.de",
+            "homepage": "https://kuetemeier.de"
         }
     ],
+    "support": {
+        "issues": "https://github.com/kuetemeier/kuetemeier-php-collection/issues",
+        "source": "https://github.com/kuetemeier/kuetemeier-php-collection"
+    },
+    "keywords": [
+        "kuetemeier",
+        "collection",
+        "php"
+    ],    
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*"
+    }
 }
