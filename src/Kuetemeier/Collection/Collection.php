@@ -50,23 +50,12 @@ class Collection
         if (is_array($initValues)) {
             $this->elements = $initValues;
         } elseif (is_string($initValues)) {
-            $this->loadFromJSON($initValues);
+            $this->loadFromJSONFile($initValues);
         }
     }
 
 
-    public static function fromJSON($filename)
-    {
-        return new Collection($filename);
-    }
-
-
-    public function loadFromJSON($filename)
-    {
-        $json = json_decode(file_get_contents($path), true);
-
-        $this->elements = $json ?: false;
-    }
+    // NOTE: removed __get() to force syntax errors and for better performance.
 
 
     /**
@@ -155,6 +144,9 @@ class Collection
     }
 
 
+    // NOTE: removed __set() to force syntax errors.
+
+
     /**
      * Store an element into this collection, bound to a specified key.
      *
@@ -167,7 +159,7 @@ class Collection
      */
     public function set($ukey, $value, $override = false)
     {
-        if (!isset($ukey)) {
+        if ((!isset($ukey)) || (!is_string($ukey))) {
             return false;
         }
 
@@ -179,6 +171,41 @@ class Collection
             return false;
         }
         $element = $value;
+        return true;
+    }
+
+
+    /**
+     * Removes the element with the unique key `$ukey` from this collection.
+     *
+     * @param string $ukey  Unique element key.
+     *
+     * @return bool true if found and removed, false otherwise
+     *
+     * @since 0.1.0
+     */
+    public function unset($ukey)
+    {
+        if ((!isset($ukey)) || (!is_string($ukey))) {
+            return false;
+        }
+
+        $element = &$this->elements;
+        $prev = &$element;
+
+        $keys = explode('/', $ukey);
+        $count = count($keys);
+        $key = '';
+        for ($i = 0; $i < $count; $i++) {
+            $key = $keys[$i];
+            if (isset($element[$key])) {
+                $prev = &$element;
+                $element = &$element[$key];
+            } else {
+                return false;
+            }
+        }
+        unset($prev[$key]);
         return true;
     }
 
@@ -215,6 +242,19 @@ class Collection
     public function count()
     {
         return count($this->elements);
+    }
+
+
+    /**
+     * Tests if there are no elements in this collection.
+     *
+     * @return bool true if empty, false if not..
+     *
+     * @since 0.1.0
+     */
+    public function isEmpty()
+    {
+        return $this->count() === 0;
     }
 
 
@@ -260,6 +300,8 @@ class Collection
      * Therefore, all elements on the SECOND level will also be removed, if
      * there is a duplicate key on the FIRST level.
      *
+     * WARNING: Ensure, that all unique keys are strings!
+     *
      * @param Collection $collection A valid instance of Collection.
      *
      * @return Collection $this - for possible chaining.
@@ -268,8 +310,10 @@ class Collection
      */
     public function fastMerge(Collection $collection)
     {
-        if (isset($this->elements) && isset($collection->get())) {
-            $this->ellements = array_merge($this->elements, $collection->get());
+        $other_elements = $collection->get();
+
+        if (isset($this->elements) && isset($other_elements)) {
+            $this->elements = array_merge($this->elements, $other_elements);
         }
 
         return $this;
@@ -277,13 +321,68 @@ class Collection
 
 
     /**
-    * Split a subpart of elements identified by `$ukey` into a seperate Collection object.
-    *
-    * @param string $ukey Unique configuration option key
-    * @return Collection A new Collection object, initialized with found elements for `$ukey`.
-    */
+     * Split a subpart of elements identified by `$ukey` into a seperate Collection object.
+     *
+     * @param string $ukey Unique element key.
+     * @return Collection A new Collection object, initialized with found elements for `$ukey`.
+     *
+     * @since 0.1.0
+     */
     public function split($ukey)
     {
         return new static($this->get($ukey));
+    }
+
+
+    /**
+     * Load elements from a JSON string.
+     *
+     * @param string $json_string A string containing valid JSON code.
+     * @param bool $overwrite true: clear and fill elements from JSON, false: do a fastMerge()
+     *
+     * @return bool true if successfull, false otherwise.
+     * @see Collection::fastMerge()
+     */
+    public function loadFromJSON($json_string, $overwrite = true)
+    {
+        $json = json_decode($json_string, true);
+
+        if (!isset($json)) {
+            return false;
+        }
+
+        if ($overwrite) {
+            $this->elements = $json;
+        } else {
+            if (empty($this->fastMerge(new Collection($json)))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Load elements from a JSON file.
+     *
+     * @param string $filename Path to a valid JSON file.
+     * @param bool   $override (optional) true: Clear and Overwrite, false: fastMerge. Default: true.
+     *
+     * @return bool true if successfull, false otherwise.
+     *
+     * @since 0.1.0
+     */
+    public function loadFromJSONFile($filename, $overwrite = true)
+    {
+        $json = file_get_contents($filename);
+
+        if (!isset($json)) {
+            return false;
+        }
+
+        return $this->loadFromJSON($json, $overwrite);
     }
 }

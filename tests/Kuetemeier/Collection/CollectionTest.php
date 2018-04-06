@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Kuetemeier\Collection;
 
+use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 
 final class CollectionTest extends TestCase
@@ -186,4 +187,107 @@ final class CollectionTest extends TestCase
         $this->assertEquals(array(), $c->get());
     }
 
+
+    public function testFastMerge(): void
+    {
+        $a = new Collection(
+            array(
+                'a' => '1',
+                'b' => array(
+                    'ba' => '3'
+                ),
+                'c' => array(
+                    'ca' => '4'
+                )
+            )
+        );
+
+        $b = new Collection(
+            array(
+                'a' => 'not 1',
+                'c' => array(
+                    'ca' => 'not 4'
+                ),
+                'd' => array(
+                    'da' => '5'
+                )
+            )
+        );
+
+        $a->fastMerge($b);
+
+        $this->assertEquals('not 1', $a->get('a'));
+        $this->assertEquals('3', $a->get('b/ba'));
+        $this->assertEquals('not 4', $a->get('c/ca'));
+        $this->assertEquals('5', $a->get('d/da'));
+        $this->assertEquals(4, $a->count());
+    }
+
+
+    public function testSplit(): void
+    {
+        $c = new Collection(self::TEST_ARRAY);
+
+        $a = $c->split('three/C-three');
+
+        $ref = array (
+            'string' => 'A string',
+            'int' => 10,
+            'bool' => false,
+            'null' => null
+        );
+
+        $this->assertEquals($ref, $a->get());
+    }
+
+
+    public function testIsEmpty(): void
+    {
+        $c = new Collection();
+
+        $this->assertEquals(true, $c->isEmpty());
+
+        $c->set('test', 'value');
+
+        $this->assertEquals(false, $c->isEmpty());
+    }
+
+    public function testNonExistingFile(): void
+    {
+        $this->expectException(Warning::class);
+
+        $c = new Collection('no file');
+        $this->assertEquals(true, $c->isEmpty());
+    }
+
+    public function testJSON(): void
+    {
+        $filename = dirname(__FILE__).'/data/test.json';
+
+        $c = new Collection($filename);
+
+        $this->assertEquals('php-kuetemeier-collection', $c->get('name'));
+        $this->assertEquals('^3.0.0', $c->get('devDependencies/del'));
+    }
+
+
+    public function testUnset(): void
+    {
+        $c = new Collection(self::TEST_ARRAY);
+
+        $this->assertEquals('1', $c->get('one'));
+
+        $this->assertEquals(true, $c->unset('one'));
+        $this->assertEquals(true, $c->unset('three/C-three/string'));
+
+        $this->assertEquals(null, $c->get('one'));
+        $this->assertEquals(null, $c->get('three/C-three/string'));
+        $this->assertEquals(10, $c->get('three/C-three/int'));
+        $this->assertEquals(count(self::TEST_ARRAY)-1, $c->count());
+
+        $c->clear();
+        $this->assertEquals(false, $c->unset('two'));
+
+
+    }
 }
