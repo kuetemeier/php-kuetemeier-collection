@@ -1,0 +1,14 @@
+{
+    "name": "kuetemeier/php-collection",
+    "description": "A common Collection PHP class to use as a baseline in your projects.",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Joerg Kuetemeier",
+            "email": "joerg@kuetemeier.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
