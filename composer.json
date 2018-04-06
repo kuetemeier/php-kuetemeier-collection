@@ -11,8 +11,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/kuetemeier/kuetemeier-php-collection/issues",
-    "source": "https://github.com/kuetemeier/kuetemeier-php-collection"
+    "issues": "https://github.com/kuetemeier/php-kuetemeier-collection/issues",
+    "source": "https://github.com/kuetemeier/php-kuetemeier-collection"
   },
   "keywords": [
     "kuetemeier",
