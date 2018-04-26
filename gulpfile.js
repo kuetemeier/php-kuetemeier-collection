@@ -57,7 +57,7 @@ gulp.task('watch', function()
 
 
 gulp.task('test', function() {
-  exec('./vendor/bin/phpunit --bootstrap vendor/autoload.php tests', function (err, stdout, stderr) {
+  exec('./vendor/bin/phpunit', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
   });

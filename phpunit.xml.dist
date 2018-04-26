@@ -1,0 +1,42 @@
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.0/phpunit.xsd"
+    backupGlobals="true"
+    backupStaticAttributes="false"
+    bootstrap="./vendor/autoload.php"
+    cacheTokens="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    forceCoversAnnotation="false"
+    stopOnError="true"
+    stopOnFailure="true"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    stopOnRisky="false"
+    testSuiteLoaderClass="PHPUnit\Runner\StandardTestSuiteLoader"
+    timeoutForSmallTests="1"
+    timeoutForMediumTests="10"
+    timeoutForLargeTests="60"
+    verbose="true"
+    defaultTestSuite="default"
+    >
+
+    <testsuites>
+        <testsuite name="PriorityHash">
+            <file>./tests/Kuetemeier/Collection/PriorityHashTest.php</file>
+        </testsuite>
+        <testsuite name="Collection">
+            <file>./tests/Kuetemeier/Collection/CollectionTest.php</file>
+        </testsuite>
+        <testsuite name="default">
+            <directory>tests/Kuetemeier/Collection</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <ini name="display_errors" value="On" />
+        <ini name="display_startup_errors" value="On" />
+    </php>
+</phpunit>
