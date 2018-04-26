@@ -41,9 +41,16 @@ class PriorityHash implements CollectionInterface
 
     protected $elements = array();
 
-    function __construct() {
+    public function __construct() {
 
     }
 
+    public function count() {
+        return count($this->elements);
+    }
+
+    public function is_empty() {
+        return $this->count() === 0;
+    }
 
 }

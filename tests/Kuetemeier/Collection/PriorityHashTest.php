@@ -6,7 +6,7 @@ namespace Kuetemeier\Collection;
 use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 
-final class CollectionTest extends TestCase
+final class PriorityHashTest extends TestCase
 {
 
     const TEST_ARRAY = array(
@@ -29,15 +29,13 @@ final class CollectionTest extends TestCase
     public function testCanBeCreated(): void
     {
         $p = new PriorityHash();
-
         $this->assertInstanceOf(
             PriorityHash::class,
             $p
         );
 
         $this->assertEquals(0, $p->count());
-
-        $this->assertEquals(0, 1);
+        $this->assertEquals(true, $p->is_empty());
     }
 
 }
