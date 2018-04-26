@@ -108,6 +108,13 @@ class PriorityHash implements CollectionInterface
         }
     }
 
+    public function foreachWithArgs($callback, $args)
+    {
+        foreach($this->sortedKeys as $key) {
+            $callback($key, $this->elements[$key], $args);
+        }
+    }
+
     public function unset($key)
     {
         unset($this->elements[$key]);
