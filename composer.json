@@ -3,7 +3,7 @@
   "description": "A common Collection PHP class to use as a baseline in your projects.",
   "type": "library",
   "license": "Apache-2.0",
-  "version": "0.1.0-alpha",
+  "version": "0.2.0-alpha",
   "authors": [
     {
       "name": "Joerg Kuetemeier",

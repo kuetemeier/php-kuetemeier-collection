@@ -385,4 +385,9 @@ class Collection
 
         return $this->loadFromJSON($json, $overwrite);
     }
+
+
+    public function map(callable $callback) {
+        $this->elements = array_map($callback, $this->elements);
+    }
 }
