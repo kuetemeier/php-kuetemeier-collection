@@ -39,18 +39,94 @@ class PriorityHash implements CollectionInterface
 {
     protected $priorities = array();
 
+    /**
+     * @see PriorityHash::buildSortedKeys()
+     */
+    protected $sortedKeys = array();
+
     protected $elements = array();
 
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
-    public function count() {
+    public function count()
+    {
         return count($this->elements);
     }
 
-    public function is_empty() {
+    public function is_empty()
+    {
         return $this->count() === 0;
     }
 
+    protected function buildSortedKeys()
+    {
+        $keys = array_keys($this->priorities);
+        usort($keys, function($a, $b) {
+            return (int) $this->priorities[$a] - (int) $this->priorities[$b];
+        });
+        $this->sortedKeys = $keys;
+    }
+
+    public function set($key, $priority, $value)
+    {
+        $this->elements[$key] = $value;
+        $this->priorities[$key] = $priority;
+        $this->buildSortedKeys();
+    }
+
+    public function get($key, $default=null) {
+        $ret = (isset($this->elements[$key])) ? $this->elements[$key] : $default;
+        return $ret;
+    }
+
+    public function has($key)
+    {
+        return isset($this->elements[$key]);
+    }
+
+    public function clear()
+    {
+        $priorities = array();
+        $sortedKeys = array();
+        $elements = array();
+    }
+
+    public function map($callback)
+    {
+        foreach($this->sortedKeys as $key) {
+            $this->elements[$key] = $callback($this->elements[$key]);
+        }
+    }
+
+    public function foreach($callback)
+    {
+        foreach($this->sortedKeys as $key) {
+            $callback($key, $this->elements[$key]);
+        }
+    }
+
+    public function unset($key)
+    {
+        unset($this->elements[$key]);
+        unset($this->priorities[$key]);
+        $this->buildSortedKeys();
+    }
+
+    public function keys()
+    {
+        return $this->sortedKeys;
+    }
+
+    public function values()
+    {
+        // TODO: test if there is a faster way, e.g. with array_values and perhaps sort.
+        $v = array();
+        foreach($this->sortedKeys as $key) {
+            array_push($v, $this->elements[$key]);
+        }
+        return $v;
+    }
 }

@@ -38,4 +38,45 @@ final class PriorityHashTest extends TestCase
         $this->assertEquals(true, $p->is_empty());
     }
 
+    public function initPriorityHash(): PriorityHash
+    {
+        $p = new PriorityHash();
+
+        $p->set("a", 10, "test1");
+        $p->set("b", 20, "test2");
+        $p->set("c", 5, "test3");
+
+        return $p;
+    }
+
+    public function testSet(): void
+    {
+        $p = $this->initPriorityHash();
+
+        $this->assertEquals(3, $p->count());
+        $this->assertEquals(array('c', 'a', 'b'), $p->keys());
+    }
+
+    public function testUnSet(): void
+    {
+        $p = $this->initPriorityHash();
+
+        $p->unset('b');
+
+        $this->assertEquals(2, $p->count());
+        $this->assertEquals(array('c', 'a'), $p->keys());
+    }
+
+    public function testMap(): void
+    {
+        $p = $this->initPriorityHash();
+
+        $p->map(function($value) { return $value.'-map'; });
+
+        $this->assertEquals(3, $p->count());
+        $this->assertEquals(array('c', 'a', 'b'), $p->keys());
+        $this->assertEquals(array('test3-map', 'test1-map', 'test2-map'), $p->values());
+    }
+
+
 }
