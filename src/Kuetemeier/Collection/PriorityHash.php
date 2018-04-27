@@ -77,8 +77,15 @@ class PriorityHash implements CollectionInterface
         $this->buildSortedKeys();
     }
 
-    public function get($key, $default=null) {
-        $ret = (isset($this->elements[$key])) ? $this->elements[$key] : $default;
+    public function get($key=null, $default=null) {
+        if (!isset($key)) {
+            $ret = array();
+            foreach($this->sortedKeys as $key) {
+                array_push($ret, $this->elements[$key]);
+            }
+        } else {
+            $ret = (isset($this->elements[$key])) ? $this->elements[$key] : $default;
+        }
         return $ret;
     }
 

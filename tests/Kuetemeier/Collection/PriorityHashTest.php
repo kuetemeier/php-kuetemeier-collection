@@ -78,5 +78,12 @@ final class PriorityHashTest extends TestCase
         $this->assertEquals(array('test3-map', 'test1-map', 'test2-map'), $p->values());
     }
 
+    public function testGetArray(): void
+    {
+        $p = $this->initPriorityHash();
+
+        //$this->assertEquals()
+    }
+
 
 }
