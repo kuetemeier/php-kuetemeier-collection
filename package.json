@@ -1,6 +1,6 @@
 {
   "name": "php-kuetemeier-collection",
-  "version": "0.2.0-alpha",
+  "version": "1.0.0",
   "version_stable": "none",
   "description": "A common Collection PHP class to use as a baseline in your projects.",
   "main": "index.js",

@@ -1,7 +1,7 @@
 # php-kuetemeier-collection
 Description: A common Collection PHP class to use as a baseline in your projects.
 
-Version: 0.2.0-alpha  
+Version: 1.0.0  
 Latest Stable Version: none
 
 License: Apache-2.0
