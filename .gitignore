@@ -11,3 +11,4 @@ composer.phar
 .buildpath
 .project
 .settings/
+package-lock.json
