@@ -2,12 +2,10 @@
 /**
  * Vim: set smartindent expandtab tabstop=4 shiftwidth=4 softtabstop=4:
  *
- * @author     Jörg Kütemeier (https://kuetemeier.de/kontakt)
- * @license    Apache-2.0
- * @link       https://kuetemeier.de
- * @copyright  2018 Jörg Kütemeier
- *
- * Copyright 2018 Jörg Kütemeier (https://kuetemeier.de/kontakt.html)
+ * @author    Jörg Kütemeier (https://kuetemeier.de/kontakt)
+ * @license   Apache-2.0
+ * @link      https://kuetemeier.de
+ * @copyright 2018 Jörg Kütemeier
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -20,7 +18,6 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- *
  */
 
 namespace Kuetemeier\Collection;
@@ -29,10 +26,11 @@ namespace Kuetemeier\Collection;
  * A common Interface for Kuetemeier Collections.
  *
  * @author Jörg Kütemeier
- * @since 0.3.0
+ * @since  0.3.0
  */
-interface CollectionInterface {
+interface CollectionInterface
+{
 
     public function count();
-    public function is_empty();
+    public function isEmpty();
 }

@@ -1,13 +1,12 @@
 <?php
+
 /**
  * Vim: set smartindent expandtab tabstop=4 shiftwidth=4 softtabstop=4:
  *
- * @author     Jörg Kütemeier (https://kuetemeier.de/kontakt)
- * @license    Apache-2.0
- * @link       https://kuetemeier.de
- * @copyright  2018 Jörg Kütemeier
- *
- * Copyright 2018 Jörg Kütemeier (https://kuetemeier.de/kontakt.html)
+ * @author    Jörg Kütemeier (https://kuetemeier.de/kontakt)
+ * @license   Apache-2.0
+ * @link      https://kuetemeier.de
+ * @copyright 2018 Jörg Kütemeier
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -20,7 +19,6 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- *
  */
 
 namespace Kuetemeier\Collection;
@@ -33,12 +31,16 @@ namespace Kuetemeier\Collection;
  * in the string.
  *
  * @author Jörg Kütemeier
- * @since 0.1.0
+ * @since  0.1.0
  */
 class Collection
 {
 
-    /** @var array Holds registered elements. */
+    /**
+     * Holds registered elements.
+     *
+     * @var array Holds registered elements.
+     */
     protected $elements = array();
 
     public function __construct($initValues = null)
@@ -73,8 +75,8 @@ class Collection
      * @return mixed Stored element or $default value.
      *
      * @since 0.1.0
-     * @see Collection::getRef() Get a reference of an element.
-     * @see http://www.phpinternalsbook.com/zvals/memory_management.html Copy on Write in PHP
+     * @see   Collection::getRef() Get a reference of an element.
+     * @see   http://www.phpinternalsbook.com/zvals/memory_management.html Copy on Write in PHP
      */
     public function get($ukey = null, $default = null)
     {
@@ -123,7 +125,7 @@ class Collection
      * @return mixed Stored element or null if no element is found.
      *
      * @since 0.1.0
-     * @see Collection::get() Get a copy of an element.
+     * @see   Collection::get() Get a copy of an element.
      */
     public function &getRef($ukey = null)
     {
@@ -264,7 +266,7 @@ class Collection
      * @return string A JSON representation of this Collection.
      *
      * @since 0.1.0
-     * @see http://php.net/manual/de/language.oop5.magic.php#object.tostring Magic __toString()
+     * @see   http://php.net/manual/de/language.oop5.magic.php#object.tostring Magic __toString()
      */
     public function __toString()
     {
@@ -324,6 +326,7 @@ class Collection
      * Split a subpart of elements identified by `$ukey` into a seperate Collection object.
      *
      * @param string $ukey Unique element key.
+     *
      * @return Collection A new Collection object, initialized with found elements for `$ukey`.
      *
      * @since 0.1.0
@@ -341,7 +344,7 @@ class Collection
      * @param bool $overwrite true: clear and fill elements from JSON, false: do a fastMerge()
      *
      * @return bool true if successfull, false otherwise.
-     * @see Collection::fastMerge()
+     * @see    Collection::fastMerge()
      */
     public function loadFromJSON($json_string, $overwrite = true)
     {
@@ -387,7 +390,8 @@ class Collection
     }
 
 
-    public function map(callable $callback) {
+    public function map(callable $callback)
+    {
         $this->elements = array_map($callback, $this->elements);
     }
 }

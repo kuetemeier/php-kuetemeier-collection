@@ -35,7 +35,7 @@ final class PriorityHashTest extends TestCase
         );
 
         $this->assertEquals(0, $p->count());
-        $this->assertEquals(true, $p->is_empty());
+        $this->assertEquals(true, $p->isEmpty());
     }
 
     public function initPriorityHash(): PriorityHash
@@ -71,19 +71,12 @@ final class PriorityHashTest extends TestCase
     {
         $p = $this->initPriorityHash();
 
-        $p->map(function($value) { return $value.'-map'; });
+        $p->map(function ($value) {
+            return $value.'-map';
+        });
 
         $this->assertEquals(3, $p->count());
         $this->assertEquals(array('c', 'a', 'b'), $p->keys());
         $this->assertEquals(array('test3-map', 'test1-map', 'test2-map'), $p->values());
     }
-
-    public function testGetArray(): void
-    {
-        $p = $this->initPriorityHash();
-
-        //$this->assertEquals()
-    }
-
-
 }

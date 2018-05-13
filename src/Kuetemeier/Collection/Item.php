@@ -1,13 +1,12 @@
 <?php
+
 /**
  * Vim: set smartindent expandtab tabstop=4 shiftwidth=4 softtabstop=4:
  *
- * @author     Jörg Kütemeier (https://kuetemeier.de/kontakt)
- * @license    Apache-2.0
- * @link       https://kuetemeier.de
- * @copyright  2018 Jörg Kütemeier
- *
- * Copyright 2018 Jörg Kütemeier (https://kuetemeier.de/kontakt.html)
+ * @author    Jörg Kütemeier (https://kuetemeier.de/kontakt)
+ * @license   Apache-2.0
+ * @link      https://kuetemeier.de
+ * @copyright 2018 Jörg Kütemeier
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -20,7 +19,6 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- *
  */
 
 namespace Kuetemeier\Collection;
@@ -33,21 +31,24 @@ namespace Kuetemeier\Collection;
  * in the string.
  *
  * @author Jörg Kütemeier
- * @since 0.1.0
+ * @since  0.1.0
  */
 abstract class Item
 {
     protected $id;
 
-    public function __construct($id = '') {
+    public function __construct($id = '')
+    {
         $this->id = $id;
     }
 
-    public function getID() {
+    public function getID()
+    {
         return $this->id;
     }
 
-    public function setID($value) {
+    public function setID($value)
+    {
         $this->id = $value;
     }
 }
