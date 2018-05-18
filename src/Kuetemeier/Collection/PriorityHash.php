@@ -121,7 +121,7 @@ class PriorityHash implements CollectionInterface
         }
     }
 
-    public function unset($key)
+    public function unsetItem($key)
     {
         unset($this->elements[$key]);
         unset($this->priorities[$key]);

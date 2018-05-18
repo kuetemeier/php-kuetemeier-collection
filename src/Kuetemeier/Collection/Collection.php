@@ -186,7 +186,7 @@ class Collection
      *
      * @since 0.1.0
      */
-    public function unset($ukey)
+    public function unsetItem($ukey)
     {
         if ((!isset($ukey)) || (!is_string($ukey))) {
             return false;

@@ -277,8 +277,8 @@ final class CollectionTest extends TestCase
 
         $this->assertEquals('1', $c->get('one'));
 
-        $this->assertEquals(true, $c->unset('one'));
-        $this->assertEquals(true, $c->unset('three/C-three/string'));
+        $this->assertEquals(true, $c->unsetItem('one'));
+        $this->assertEquals(true, $c->unsetItem('three/C-three/string'));
 
         $this->assertEquals(null, $c->get('one'));
         $this->assertEquals(null, $c->get('three/C-three/string'));
@@ -286,6 +286,6 @@ final class CollectionTest extends TestCase
         $this->assertEquals(count(self::TEST_ARRAY) - 1, $c->count());
 
         $c->clear();
-        $this->assertEquals(false, $c->unset('two'));
+        $this->assertEquals(false, $c->unsetItem('two'));
     }
 }

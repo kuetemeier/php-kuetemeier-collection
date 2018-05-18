@@ -61,7 +61,7 @@ final class PriorityHashTest extends TestCase
     {
         $p = $this->initPriorityHash();
 
-        $p->unset('b');
+        $p->unsetItem('b');
 
         $this->assertEquals(2, $p->count());
         $this->assertEquals(array('c', 'a'), $p->keys());
